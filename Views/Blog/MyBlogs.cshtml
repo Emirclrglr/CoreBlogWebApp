@@ -1,0 +1,132 @@
+﻿@using EntityLayer.Concrete
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<Blog>
+
+@{
+    ViewData["Title"] = "BlogListByAuthor";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .action-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h1 align="center" class="card-title">Bloglarım</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td> Görsel </td>
+                        <td align="center"> Başlık </td>
+                        <td align="center"> Oluşturulma Tarihi </td>
+                        <td align="center"> Kategori </td>
+                        <td align="center"> Durum </td>
+                        <td align="center"> Sil </td>
+                        <td align="center"> Düzenle </td>
+                        <td align="center"> Blog </td>
+                    </tr>
+                </thead>
+               
+                    <tbody>
+                    @if(Model.Count == 0)
+                    {
+                        <tr>
+                            <td align="center" class="alert-danger" colspan="12">
+                                <span style="color: black;">Hiç Blogunuz Bulunmuyor.</span>
+                                <strong><a href="/Blog/CreateBlog/" class="text-black">Oluşturmak için tıklayın!</a></strong>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="py-1">
+                                    <img src="@item.BlogImage" alt="image" />
+                                </td>
+                                <td align="center"> @item.BlogTitle </td>
+                                <td align="center"> @(((DateTime)item.BlogCreateDate).ToString("dd.MM.yyyy")) </td>
+                                <td align="center"><span class="badge badge-primary">@item.Category.CategoryName</span></td>
+                                @if (item.BlogStatus == true)
+                                {
+                                    <td align="center"><span class="badge badge-success">AKTİF</span></td>
+                                }
+                                else
+                                {
+                                    <td align="center"><span class="badge badge-danger">PASİF</span></td>
+                                }
+                                <td align="center"><a id="sil" href="/Blog/Delete/@item.BlogId" class="btn btn-danger">Sil</a></td>
+                                <td align="center"><a href="/Blog/Edit/@item.BlogId" class="btn btn-info">Düzenle</a></td>
+                                <td align="center"><a href="/Blog/BlogReadAll/@item.BlogId" class="btn btn-success">Bloga Git</a></td>
+                            </tr>
+                        }
+                    }
+                    
+                    </tbody>
+            </table>
+            <br />
+            <div class="pagination-container">
+                @Html.PagedListPager(
+                         Model,
+                         page => Url.Action("MyBlogs", "Blog", new { page }),
+                         new PagedListRenderOptions
+                {
+                    LiElementClasses = new[] { "page-item" },
+                    PageClasses = new[] { "page-link" },
+                    UlElementClasses = new[] { "pagination" },
+                    LinkToPreviousPageFormat = "Önceki",
+                    LinkToNextPageFormat = "Sonraki",
+                    LinkToFirstPageFormat = "İlk",
+                    LinkToLastPageFormat = "Son",
+                    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                    DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                    DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                    DisplayLinkToLastPage = PagedListDisplayMode.Always
+                })
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var deleteButtons = document.querySelectorAll(".btn-danger");
+        deleteButtons.forEach(function (button) {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+                var deleteUrl = this.href;
+
+                Swal.fire({
+                    title: "Gerçekten silmek istiyor musunuz?",
+                    text: "Bu işlemi geri alamayacaksınız!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#ffc107",
+                    confirmButtonText: "Evet, sil!",
+                    cancelButtonText: "İptal",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = deleteUrl;
+                    }
+                });
+            });
+        });
+    });
+</script>

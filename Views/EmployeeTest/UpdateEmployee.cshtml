@@ -1,0 +1,16 @@
+﻿@model CoreBlogWebApp.Controllers.Class1
+
+@{
+    ViewData["Title"] = "UpdateEmployee";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form method="post">
+    <input type="hidden" asp-for="Id" />
+    <label>Çalışan adı ve soyadı</label>
+    <br />
+    <input type="text" asp-for="Name" class="form-control" />
+    <br />
+    <button type="submit" class="btn btn-outline-info">Güncelle</button>
+</form>
+

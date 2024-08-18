@@ -1,0 +1,83 @@
+﻿@using EntityLayer.Concrete
+@model List<About>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<body>
+
+    <section class="main-content-w3layouts-agileits">
+        <div class="container">
+            <h3 class="tittle">Hakkımızda</h3>
+            <div class="row inner-sec">
+                <div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
+                    @foreach (var item in Model)
+                    {
+                        <div class="blog-grid-top">
+
+                            <div class="blog_info_left_grid">
+                                <a href="single.html">
+                                    <img src="~/web/images/b5.jpg" class="img-fluid" alt="">
+                                </a>
+                            </div>
+
+                            <h3>Merhaba ve Hoş geldiniz!</h3>
+                            <p>
+                                Biz, Core Blog olarak sizlere bilgi, deneyim ve ilham dolu içerikler sunan dinamik bir blog platformuyuz. Hayatın farklı alanlarından gelen yazarlarımız, kendi uzmanlık alanları ve tutkuları doğrultusunda zengin içerikler hazırlamaktadır. Amacımız, okuyucularımızın ilgi duydukları konularda bilgi sahibi olmalarını sağlamak ve onlara keyifli bir okuma deneyimi sunmaktır.
+                            </p>
+
+                            <h3>Vizyonumuz</h3>
+                            <p>
+                                Misyonumuz, herkesin öğrenmeye, keşfetmeye ve gelişmeye olanak tanıyan bir platform oluşturmaktır. Okuyucularımızın güvenilir kaynaklardan bilgi edinmelerini ve farklı bakış açılarıyla dünyayı daha iyi anlamalarını hedefliyoruz. Aynı zamanda, yazarlarımıza da kendi seslerini duyurabilecekleri bir ortam sağlamak ve yaratıcılıklarını geliştirmelerine olanak tanımaktır.
+                            </p>
+
+                            <h3>Konu Başlıklarımız</h3>
+                            <p>
+                                Core Blog olarak geniş bir konu yelpazesi sunuyoruz. Sağlık, eğitim, teknoloji, seyahat, kültür, sanat, kişisel gelişim, yaşam tarzı ve daha birçok alanda yazılarımız mevcuttur. Her bir konuda uzmanlaşmış yazarlarımızın deneyimleri ve araştırmalarıyla hazırlanan içeriklerimiz, okuyucularımıza bilgilendirici ve etkileyici bir okuma deneyimi sunmayı amaçlamaktadır.
+                            </p>
+
+                            <h3>Nasıl Çalışıyoruz?</h3>
+                            <p>
+                                Core Blog, birbirinden farklı yazarların bir araya gelerek bilgi ve deneyimlerini paylaştığı bir platformdur. Yazarlarımız, kendi bloglarını oluşturarak içeriklerini düzenleyebilir, okuyucularla etkileşimde bulunabilir ve fikir alışverişinde bulunabilirler. Ayrıca, okuyucularımız da kendi yorumlarıyla içeriğe katkıda bulunabilir ve topluluğumuza katılarak bilgi paylaşımına destek olabilirler.
+                            </p>
+
+                            <h3> Bizimle Birlikte Olun! </h3>
+                            <p>
+                                Core Blog ailesine katılmak çok kolay! Siz de kendi deneyimlerinizi paylaşmak, bilgi ve deneyimlerinizi geniş bir kitleyle paylaşmak için bize katılabilirsiniz. Ücretsiz üye olarak, yazarlarımızın yazılarını takip edebilir, kendi blogunuzu oluşturabilir ve topluluğumuzda yer alabilirsiniz. Birlikte daha fazla bilgiye ve ilhama ulaşalım!
+                            </p>
+
+                            <h3>İletişim</h3>
+                            <p>
+                                Bizi takip etmeye devam edin ve bizimle iletişimde kalın! Sorularınız, önerileriniz veya iş birliği talepleriniz için bize <strong>Emirhancalaraglar@gmail.com</strong> adresinden veya sosyal medya hesaplarımızdan ulaşabilirsiniz.
+
+                                Teşekkür ederiz ve bizi tercih ettiğiniz için minnettarız.
+
+                                Sevgiler, 
+                                <br />
+                                <strong>Core Blog Yazar Ekibi</strong>
+                            </p>
+                        </div>
+                    }
+                </div>
+                <aside class="col-lg-4 agileits-w3ls-right-blog-con text-right">
+                    <div class="right-blog-info text-left">
+                        <div class="tech-btm">
+                            <img src="~/web/images/banner1.jpg" class="img-fluid" alt="">
+                        </div>
+                        @await Html.PartialAsync("~/Views/NewsLetter/SubscribeToNewsletter.cshtml")
+                        @await Html.PartialAsync("~/Views/About/SocialMediaAccountsPartial.cshtml")
+
+                        <div class="tech-btm">
+                            @await Component.InvokeAsync("OtherPostsOfThisAuthor")
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

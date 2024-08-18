@@ -1,0 +1,37 @@
+﻿@using EntityLayer.Concrete
+@model List<Category>
+@{
+    Layout = null;
+}
+
+
+<table class="table table-bordered">
+   <tr>
+       <td align="center">#</td>
+       <th>Kategori Adı</th>
+       <th>Durum</th>
+       <th>Detaylar</th>
+       <th>Sil</th>
+
+   </tr
+   @foreach (var item in Model)
+   {
+   <tr>
+       <td align="center">@item.CategoryId</td>
+       <td>@item.CategoryName</td>
+            @if (item.CategoryStatus == true)
+            {
+                <td><button class="btn btn-success">Aktif</button></td>
+            }
+            else
+            {
+                <td><button class="btn btn-danger">Pasif</button></td>
+            }
+       <td><a href="#" class="btn btn-info">Detaylar</a></td>
+       <td><a href="#" class="btn btn-danger">Sil</a></td>
+   </tr>
+        
+       
+   }
+</table>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />

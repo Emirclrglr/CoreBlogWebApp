@@ -1,0 +1,65 @@
+﻿<div class="tech-btm">
+    <h2>Mail bültenimize abone olun</h2>
+    <p>Teknoloji, yazılım ve diğer bloglar..</p>
+    <form id="aboneOlFormu">
+        <input type="email" id="MailAddress" name="MailAddress" placeholder="Email" required="">
+        <input type="submit" value="Abone Ol">
+    </form>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- SweetAlert2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<!-- SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    $(document).ready(function () {
+        var isSubmitting = false;
+
+        $('#aboneOlFormu').submit(function (e) {
+            e.preventDefault();
+
+            if (isSubmitting) {
+                return false;
+            }
+
+            isSubmitting = true;
+
+            Swal.fire({
+                title: "Başarılı!",
+                text: "Mail Bültenimize Abone Oldunuz!",
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonText: "Tamam"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var formData = {
+                        MailAddress: $('#MailAddress').val()
+                    };
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("SubscribeToNewsletter", "NewsLetter")',
+                        data: formData,
+                        success: function (response) {
+                            window.location.reload();
+                        },
+                        error: function (xhr, status, error) {
+                            Swal.fire({
+                                title: "Hata!",
+                                text: "Mail bültenine abone olmaya çalışırken bir hata meydana geldi!",
+                                icon: "error"
+                            }).then(() => {
+                                isSubmitting = false;
+                            });
+                        }
+                    });
+                } else {
+                    isSubmitting = false;
+                }
+            });
+        });
+    });
+</script>

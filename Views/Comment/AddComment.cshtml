@@ -1,0 +1,45 @@
+﻿<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="comment-top">
+        <h4>Yorum Yap</h4>
+        <div class="comment-bottom">
+            <form id="yorumFormu">
+                <input class="form-control" type="text" id="CommentatorUsername" name="CommentatorUsername" placeholder="Adınız" required="">
+                <input class="form-control" type="text" id="CommentTitle" name="CommentTitle" placeholder="Konu" required="">
+                <textarea class="form-control" id="CommentContent" name="CommentContent" placeholder="Mesaj..." required=""></textarea>
+                <button type="submit" class="btn btn-success">Gönder</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#yorumFormu').submit(function (e) {
+                e.preventDefault(); 
+
+                var commentatorUsername = $('#CommentatorUsername').val();
+                var commentTitle = $('#CommentTitle').val();
+                var commentContent = $('#CommentContent').val();
+
+                $.ajax({
+                    url: '/Comment/AddComment', 
+                    type: 'POST',
+                    data: {
+                        CommentatorUsername: commentatorUsername,
+                        CommentTitle: commentTitle,
+                        CommentContent: commentContent
+                    },
+                    success: function (response) {
+                        console.log('Yorum eklendi:', response);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Hata:', error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+

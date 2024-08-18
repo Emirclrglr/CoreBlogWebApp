@@ -1,0 +1,16 @@
+﻿@model CoreBlogWebApp.Models.RoleViewModel
+@{
+    ViewData["Title"] = "AddRole";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("AddRole", "AdminRole", FormMethod.Post))
+{
+    <br />
+    <br />
+    @Html.Label("Rol Adı")
+    @Html.TextBoxFor(model => model.Name, new {@class = "form-control"})
+    <br />
+    <button class="btn btn-outline-info">Ekle</button>
+}
+

@@ -1,0 +1,61 @@
+﻿@using EntityLayer.Concrete
+@model IEnumerable<AppUser>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-lg-12">
+    <div class="ibox ">
+        <div class="ibox-title">
+            <h5>Yazarlar</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a href="#" class="dropdown-item">Config option 1</a>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-item">Config option 2</a>
+                    </li>
+                </ul>
+                <a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td align="center" style="font-weight: bold;">Görsel</td>
+                        <th>Yazar Adı</th>
+                        <th>Mail Adresi</th>
+                        <th>Kullanıcı Adı</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td align="center"><img src="@item.ImgUrl" style="border-radius: 20px; height:30px; width: 30px;" /></td>
+                            <td>@item.Firstname @item.Lastname</td>
+                            <td>@item.Email</td>
+                            <td>@item.UserName</td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

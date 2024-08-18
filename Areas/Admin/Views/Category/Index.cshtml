@@ -1,0 +1,120 @@
+﻿@using EntityLayer.Concrete
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<Category>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<head>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        .action-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+<br />
+<div class="col-lg-12">
+    <div class="ibox ">
+        <div class="ibox-title">
+            <h5> Kategoriler </h5>
+        </div>
+        <div class="ibox-content">
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td align="center">#</td>
+                        <td align="center">Kategori Adı</td>
+                        <td align="center">Durum</td>
+                        <td align="center">Pasif Yap</td>
+                        <td align="center">Aktif Yap</td>
+                        <td align="center">Düzenle</td>
+                        <td align="center">Sil</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td align="center"><i class="@item.CategoryIcon"></i></td>
+                            <td align="center">@item.CategoryName</td>
+                            @if (item.CategoryStatus == true)
+                            {
+                                <td align="center"><span class="badge badge-info">Aktif</span></td>
+                            }
+                            else
+                            {
+                                <td align="center"><span class="badge badge-danger">Pasif</span></td>
+                            }
+                            <td align="center"><a href="/Admin/Category/SetPassive/@item.CategoryId" class="btn btn-danger">Pasif Yap</a></td>
+                            <td align="center"><a href="/Admin/Category/SetActive/@item.CategoryId" class="btn btn-primary">Aktif Yap</a></td>
+                            <td align="center"><a href="/Admin/Category/EditCategory/@item.CategoryId" class="btn btn-success">Düzenle</a></td>
+                            <td align="center"><a href="/Admin/Category/DeleteCategory/@item.CategoryId" class="btn btn-warning">Sil</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="action-container">
+                <a href="/Admin/Category/AddCategory" class="btn btn-primary btn-rounded">Yeni Kategori Ekle</a>
+                <div class="pagination-container">
+                    @Html.PagedListPager(
+                             Model,
+                             page => Url.Action("Category", "Admin", new { page }),
+                             new PagedListRenderOptions
+                    {
+                        LiElementClasses = new[] { "page-item" },
+                        PageClasses = new[] { "page-link" },
+                        UlElementClasses = new[] { "pagination" },
+                        LinkToPreviousPageFormat = "Önceki",
+                        LinkToNextPageFormat = "Sonraki",
+                        LinkToFirstPageFormat = "İlk",
+                        LinkToLastPageFormat = "Son",
+                        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                        DisplayLinkToLastPage = PagedListDisplayMode.Always
+                    })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var deleteButtons = document.querySelectorAll(".btn-warning");
+        deleteButtons.forEach(function (button) {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+                var deleteUrl = this.href;
+
+                Swal.fire({
+                    title: "Gerçekten silmek istiyor musunuz?",
+                    text: "Bu işlemi geri alamayacaksınız!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#ffc107",
+                    confirmButtonText: "Evet, sil!",
+                    cancelButtonText: "İptal",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = deleteUrl;
+                    }
+                });
+            });
+        });
+    });
+</script>

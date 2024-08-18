@@ -1,0 +1,50 @@
+﻿@using EntityLayer.Concrete
+@model List<Notification>
+@{
+    ViewData["Title"] = "AllNotifications";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h1 align="center" class="card-title">Bildirimler</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td align="center"> # </td>
+                        <td align="center"> Bildirim </td>
+                        <td align="center"> İçerik </td>
+                        <td align="center"> Tarih </td>
+                        <td align="center"> Durum </td>
+                        <td align="center"> Sil </td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td align="center" class="@item.NotificationTypeColor py-1">
+                                <i class="@item.NotificationTypeSymbol">
+                            </td>
+                            <td align="center"> @item.NotificationType </td>
+                            <td align="center"> @item.NotificationDetails </td>
+                            <td align="center"> @(((DateTime)item.NotifactionDate).ToString("dd.MM.yyyy")) </td>
+                            @if (item.NotificationStatus == true)
+                            {
+                                <td align="center"><a href="/Notification/Readed/@item.NotificationId" class="btn btn-danger">Okunmadı</a></td>
+                            }
+                            else
+                            {
+                                <td align="center"><a href="/Notification/UnReaded/@item.NotificationId" class="btn btn-success">Okundu</a></td>
+                            }
+                            <td align="center"><a id="sil" href="/Blog/Delete/@item.NotificationId" class="btn btn-danger">Sil</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

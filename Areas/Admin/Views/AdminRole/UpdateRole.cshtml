@@ -1,0 +1,19 @@
+﻿@model CoreBlogWebApp.Models.RoleUpdateViewModel
+@{
+    ViewData["Title"] = "UpdateRole";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("UpdateRole", "AdminRole", FormMethod.Post))
+{
+    <br />
+    <br />
+    @Html.HiddenFor(x=>x.Id)
+    @Html.Label("Rol Adı")
+    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-outline-info">Düzenle</button>
+}
+
+
+

@@ -1,0 +1,52 @@
+﻿@model EntityLayer.Concrete.Blog
+@{
+    ViewData["Title"] = "CreateBlog";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+
+@{
+    List<SelectListItem> categoryList = ViewBag.CategoryList;
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title" align="center">Blog Yayınla</h2>
+            <br />
+            <form method="post">
+                <div class="form-group">
+                    <label>Başlık<sup class="text-danger">*</sup></label>
+                    <input type="text" class="form-control" id="BlogTitle" asp-for="BlogTitle">
+                    <span class="text-danger" asp-validation-for="BlogTitle"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label>İçerik<sup class="text-danger">*</sup></label>
+                    <textarea class="form-control" id="BlogContent" rows="10" asp-for="BlogContent"></textarea>
+                    <span class="text-danger" asp-validation-for="BlogContent"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label>Görsel Yolu<sup class="text-danger">*</sup></label>
+                    <input type="text" class="form-control" id="BlogImage" asp-for="BlogImage">
+                    <span class="text-danger" asp-validation-for="BlogImage"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label>Küçük Görsel Yolu<sup class="text-danger">*</sup></label>
+                    <input type="text" class="form-control" id="BlogThumbnailImage" asp-for="BlogThumbnailImage">
+                    <span class="text-danger" asp-validation-for="BlogThumbnailImage"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label>Kategori<sup class="text-danger">*</sup></label>
+                    <select class="form-control" asp-for="CategoryId" asp-items="categoryList"></select>
+                </div>
+                <br />
+                <button type="submit" class="btn btn-gradient-primary mr-2">Yayınla</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+

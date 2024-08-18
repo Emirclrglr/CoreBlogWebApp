@@ -1,0 +1,24 @@
+﻿<div class="container">
+	<div class="row">
+		<div class="col-lg-4 footer-grid-agileits-w3ls text-left">
+			<h3>Hakkımızda</h3>
+			<p>Biz, Core Blog olarak sizlere bilgi, deneyim ve ilham dolu içerikler sunan dinamik bir blog platformuyuz. Hayatın farklı alanlarından gelen yazarları..</p>
+			<div class="read">
+				<a href="~/About/Index/" class="btn btn-primary read-m">Daha fazla..</a>
+			</div>
+		</div>
+		<div class="col-lg-4 footer-grid-agileits-w3ls text-left">
+
+			@await Component.InvokeAsync("Last3PostsFooter")
+
+		</div>
+		<!-- subscribe -->
+		<div class="col-lg-4 subscribe-main footer-grid-agileits-w3ls text-left">
+				<div class="subscribe-main text-left">
+						@await Html.PartialAsync("~/Views/NewsLetter/SubscribeToNewsletter.cshtml")
+				<p>Gizliliğinize saygı duyuyoruz. Gereksiz mail atmamaya özen gösteriniz!</p>
+			</div>
+			<!-- //subscribe -->
+		</div>
+	</div>
+

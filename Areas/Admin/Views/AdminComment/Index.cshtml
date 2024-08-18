@@ -1,0 +1,74 @@
+﻿@using EntityLayer.Concrete
+@model List<Comment>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>Yorumlar</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <a href="#" class="dropdown-item">Config option 1</a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item">Config option 2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Yorum Sahibi</th>
+                            <th>Başlık</th>
+                            <th>İçerik</th>
+                            <th>Blog</th>
+                            <th>Tarih</th>
+                            <td align="center" style="font-weight: bold;">Durum</td>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>@item.CommentatorUsername</td>
+                                <td>@item.CommentTitle</td>
+                                <td>@item.CommentContent</td>
+                                <td>@item.Blogs.BlogTitle</td>
+                                <td>@item.CommentDate.ToShortDateString()</td>
+                                @if(item.CommentStatus == true)
+                                {
+                                    <td align="center"><a href="/Admin/AdminComment/StatusPassive/@item.CommentId"><i class="fa fa-check text-navy"></i></a></td>
+                                }
+                                else
+                                {
+                                    <td align="center"><a href="/Admin/AdminComment/StatusActive/@item.CommentId"><i class="fa fa-times text-danger"></i></a></td>
+                                }
+                            </tr>
+                        </tbody>
+
+                    }
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

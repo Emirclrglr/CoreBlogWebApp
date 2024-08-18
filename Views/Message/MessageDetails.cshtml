@@ -1,0 +1,25 @@
+﻿@model EntityLayer.Concrete.Message2
+
+@{
+    ViewData["Title"] = "MessageDetails";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title" align="center">Mesaj İçeriği</h2>
+            @Html.HiddenFor(x=>x.MessageId)
+
+            @Html.Label("Gönderen")
+            @Html.TextBoxFor(x=>x.SenderUser.AuthorName, new { @class = "form-control", disabled = "disabled" })
+            <br />
+            @Html.Label("Konu")
+            @Html.TextBoxFor(x=>x.Subject,new {@class = "form-control",disabled="disabled"})
+            <br />
+            @Html.Label("İçerik")
+            @Html.TextAreaFor(x => x.MessageContent,10,10, new { @class = "form-control", disabled = "disabled" })
+        </div>
+    </div>
+</div>
+

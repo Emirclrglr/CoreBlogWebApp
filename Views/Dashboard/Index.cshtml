@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-success text-white mr-2">
+            <i class="mdi mdi-home"></i>
+        </span> Dashboard
+    </h3>
+</div>
+
+
+@await Component.InvokeAsync("DashboardStatistics")
+
+@await Component.InvokeAsync("BlogListDashboard")
+
+@await Component.InvokeAsync("AuthorAboutOnDashboard")
+
+@await Component.InvokeAsync("CategoryListDashboard")
+

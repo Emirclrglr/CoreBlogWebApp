@@ -1,0 +1,41 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+    @* Head Partial Area *@
+@await Html.PartialAsync("/Views/Author/HeadPartial.cshtml")
+
+<body>
+    <div class="container-scroller">
+
+        @* Navbar Partial Area *@
+        @await Html.PartialAsync("/Views/Author/NavbarPartial.cshtml")
+
+        <div class="container-fluid page-body-wrapper">
+
+            @* Sibebar Partial Area *@
+            @await Html.PartialAsync("/Views/Author/SidebarPartial.cshtml")
+
+
+            @* Content Area *@
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    @RenderBody()
+                </div>
+
+                @* Footer Partial Area *@
+                @await Html.PartialAsync("/Views/Author/FooterPartial.cshtml")
+
+            </div>
+        </div>
+    </div>
+
+    @* Script Partial Area *@
+    @await Html.PartialAsync("/Views/Author/ScriptPartial.cshtml")
+
+</body>
+</html>

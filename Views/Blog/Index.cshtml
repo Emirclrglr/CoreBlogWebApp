@@ -1,0 +1,98 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<EntityLayer.Concrete.Blog>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<head>
+    <link href="~/web/css/style.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <style>
+        .pagination-container {
+            text-align: center;
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+    </style>
+</head>
+
+<section class="main-content-w3layouts-agileits">
+    <div class="container">
+        <h3 class="tittle">Blog Gönderileri</h3>
+        <div class="inner-sec">
+            <!--left-->
+            <div class="left-blog-info-w3layouts-agileits text-left">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-4 card">
+                            <a href="~/Blog/BlogReadAll/@item.BlogId">
+                                <img src="@item.BlogImage" class="card-img-top img-fluid" alt="">
+                            </a>
+                            <div class="card-body">
+                                <ul class="blog-icons my-4">
+                                    <li>
+                                        <a href="#">
+                                            <i class="far fa-calendar-alt"></i> @item.BlogCreateDate.ToShortDateString()
+                                        </a>
+                                    </li>
+                                    <li class="mx-2">
+                                        <a href="#">
+                                            <i class="far fa-comment"></i> 0
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="@item.Category.CategoryIcon"></i> @item.Category.CategoryName
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <h5 class="card-title">
+                                    <a href="~/Blog/BlogReadAll/@item.BlogId">@item.BlogTitle</a>
+                                </h5>
+                                @if (item.BlogContent.Length <= 150)
+                                {
+                                    <p class="card-text mb-3">@item.BlogContent</p>
+                                }
+                                else
+                                {
+                                    <p class="card-text mb-3">@item.BlogContent.Substring(0, 150)...</p>
+
+                                }
+                                <a href="/Blog/BlogReadAll/@item.BlogId" class="btn btn-primary read-m">Devamını oku</a>
+                            </div>
+                            <br />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="pagination-container">
+            @Html.PagedListPager(
+                     Model,
+                     page => Url.Action("Index", "Blog", new { page }),
+                     new PagedListRenderOptions
+            {
+                LiElementClasses = new[] { "page-item" },
+                PageClasses = new[] { "page-link" },
+                UlElementClasses = new[] { "pagination" },
+                LinkToPreviousPageFormat = "Önceki",
+                LinkToNextPageFormat = "Sonraki",
+                LinkToFirstPageFormat = "İlk",
+                LinkToLastPageFormat = "Son",
+                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                DisplayLinkToLastPage = PagedListDisplayMode.Always
+            }
+                     )
+        </div>
+    </div>
+</section>
+
+
