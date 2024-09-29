@@ -10,3 +10,4 @@ Murat yücedağ hocamız ile ASP.NET Core platformunda geliştirmiş olduğumuz 
 - Fluent Validation
 - EntityFramework
 - MSSQL
+- X.PagedList
